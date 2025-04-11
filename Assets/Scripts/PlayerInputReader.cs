@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using PI.Controllers;
 
 namespace PI.InputReading
 {
@@ -23,6 +22,12 @@ namespace PI.InputReading
         InputAction shootAction;
         InputAction blockAction;
         InputAction drinkAction;
+        
+        PlayerController playerController;
+
+        public float XAxis => moveAction.ReadValue<float>();
+
+        private void Awake() => playerController = GetComponent<PlayerController>();
 
         private void OnEnable()
         {
@@ -46,12 +51,12 @@ namespace PI.InputReading
 
         private void SubscribeActions()
         {
-            jumpAction.performed += ReadJumpPerformedAction;
-            jumpAction.canceled += ReadJumpCanceledAction;
-            meleeAction.performed += ReadMeleeAction;
-            shootAction.performed += ReadShootAction;
-            blockAction.performed += ReadBlockAction;
-            drinkAction.performed += ReadDrinkAction;
+            jumpAction.performed += playerController.ReadJumpPerformedAction;
+            jumpAction.canceled += playerController.ReadJumpCanceledAction;
+            meleeAction.performed += playerController.ReadMeleeAction;
+            shootAction.performed += playerController.ReadShootAction;
+            blockAction.performed += playerController.ReadBlockAction;
+            drinkAction.performed += playerController.ReadDrinkAction;
         }
 
         private void OnDisable()
@@ -59,28 +64,16 @@ namespace PI.InputReading
             UnsubscribeActions();
 
             basicMap.Disable();
-        }   
+        }
 
         private void UnsubscribeActions()
         {
-            jumpAction.performed -= ReadJumpPerformedAction;
-            jumpAction.canceled -= ReadJumpCanceledAction;
-            meleeAction.performed -= ReadMeleeAction;
-            shootAction.performed -= ReadShootAction;
-            blockAction.performed -= ReadBlockAction;
-            drinkAction.performed -= ReadDrinkAction;
+            jumpAction.performed -= playerController.ReadJumpPerformedAction;
+            jumpAction.canceled -= playerController.ReadJumpCanceledAction;
+            meleeAction.performed -= playerController.ReadMeleeAction;
+            shootAction.performed -= playerController.ReadShootAction;
+            blockAction.performed -= playerController.ReadBlockAction;
+            drinkAction.performed -= playerController.ReadDrinkAction;
         }
-
-        private void Update()
-        {
-            Debug.Log(moveAction.ReadValue<float>());
-        }
-
-        private void ReadJumpPerformedAction(InputAction.CallbackContext value) => Debug.Log("Jumping");
-        private void ReadJumpCanceledAction(InputAction.CallbackContext value) => Debug.Log("Stop jumping");
-        private void ReadMeleeAction(InputAction.CallbackContext value) => Debug.Log("Meleeing");
-        private void ReadShootAction(InputAction.CallbackContext value) => Debug.Log("Shooting");
-        private void ReadBlockAction(InputAction.CallbackContext value) => Debug.Log("Blocking");
-        private void ReadDrinkAction(InputAction.CallbackContext value) => Debug.Log("Drinking");
     }
 }

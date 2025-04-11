@@ -134,7 +134,9 @@ GameObject:
   - component: {fileID: 400586341}
   - component: {fileID: 400586340}
   - component: {fileID: 400586339}
+  - component: {fileID: 400586343}
   - component: {fileID: 400586342}
+  - component: {fileID: 400586344}
   m_Layer: 0
   m_Name: Character_Player
   m_TagString: Untagged
@@ -259,6 +261,31 @@ MonoBehaviour:
   shootActionName: Shoot
   blockActionName: Block
   drinkActionName: Drink
+--- !u!114 &400586343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400586338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f23bcc39200ac456aa17bed1b86aa710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialState: 0
+--- !u!114 &400586344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400586338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5afbb7154d8d4626a8aebc26ea38eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
