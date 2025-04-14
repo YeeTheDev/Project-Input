@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using PI.Movement;
 using PI.InputReading;
+using PI.Attackers;
+using PI.Attacks.Types;
 
 namespace PI.Controllers
 {
@@ -13,12 +15,14 @@ namespace PI.Controllers
         bool grounded;
         bool stopped;
         Mover mover;
+        Attacker attacker;
         PlayerInputReader inputReader;
 
         private void Awake()
         {
-            inputReader = GetComponent<PlayerInputReader>();
             mover = GetComponent<Mover>();
+            attacker = GetComponent<Attacker>();
+            inputReader = GetComponent<PlayerInputReader>();
 
             inputReader.FindActionMapAndActions();
         }
@@ -72,12 +76,12 @@ namespace PI.Controllers
 
         public void ReadMeleeAction(InputAction.CallbackContext value)
         {
-            if (!stopped) { Debug.Log("Attacking"); }
+            if (!stopped) { attacker.TryAttack(AttackType.Melee); }
         }
 
         public void ReadShootAction(InputAction.CallbackContext value)
         {
-            if (!stopped) { Debug.Log("Shooting"); }
+            if (!stopped) { attacker.TryAttack(AttackType.Ranged); }
         }
 
         public void ReadBlockAction(InputAction.CallbackContext value)
